@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+      width: 300px;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #ff4d6d;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-110%);
+    }
+
+    #no {
+      background: #ccc;
+      right: 50%;
+      transform: translateX(110%);
+    }
+
+    .message {
+      display: none;
+      font-size: 22px;
+      color: #ff4d6d;
+    }
+
+    /* ❤️ Falling hearts */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #ff4d6d;
+      font-size: 20px;
+      animation: fall linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1 id="question">Wanna be my Valentine? 💘</h1>
+
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 😢</button>
+
+    <div class="message" id="message">
+      Yayyy! 💕<br>
+      You just made my day 😍🌹
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const question = document.getElementById("question");
+    const message = document.getElementById("message");
+
+    // NO button runs away 😈
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // YES button 💕
+    yesBtn.addEventListener("click", () => {
+      question.style.display = "none";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+      message.style.display = "block";
+    });
+
+    // ❤️ Falling hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 10 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
